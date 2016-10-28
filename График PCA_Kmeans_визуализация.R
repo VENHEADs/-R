@@ -4,3 +4,4 @@ pc<-princomp(d) #4 делаем мгк
 cl<-as.factor(cl) #3 делаем еее фактором
 cl<-km$cluster #2 переменная для кластерво и лементов
 km<-kmeans(d,10,algorithm = "MacQueen",iter.max = 50)  #1 разбиваем на кластеры
+lines(1:4,y[1:4],col="green")
