@@ -1,0 +1,18 @@
+vb<-read.csv("viborka_10000_chist.csv",sep=',')
+hor<-read.csv("horoshie_chist.csv",sep=',')
+horx<-data.matrix(hor)
+vbx<-data.matrix(vb)
+totx<-rbind(horx,vbx)
+totx[is.na(totx)==TRUE]<-0
+totf<-data.frame(totx)
+pca<-princomp(totf)
+pca1<-prcomp(totf)
+library(FactoMineR)
+result<-PCAplo(totf)
+library(psych)
+fit<-principal(totf)
+fit <- princomp(totf, cor=TRUE)
+summary(fit)
+biplot(fit,choices = c(2,4))
+xxx<-fit$scores
+lines(xxx[10001:10192,2],xxx[10001:10192,4],col="green",type = "p")
