@@ -1,0 +1,63 @@
+---
+title: "Pca_analysis+visual"
+author: "Venheads"
+date: '29 окт€бр€ 2016 г '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+vb<-read.csv("viborka_10000_chist.csv",sep=',')
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+hor<-read.csv("horoshie_chist.csv",sep=',')
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+horx<-data.matrix(hor)
+vbx<-data.matrix(vb)
+totx<-rbind(horx,vbx)
+totx[is.na(totx)==TRUE]<-0
+totf<-data.frame(totx)
+```
+
+```{r}
+pca<-princomp(totf)
+pca1<-prcomp(totf)
+```
+```{r}
+library(FactoMineR)
+result<-PCA(totf)
+```
+```{r}
+library(psych)
+library(ggplot2)
+library(ggbiplot)
+fit2<-principal(totf,nfactors = 5)
+```
+```{r}
+fit <- princomp(totf, cor=TRUE)
+summary(fit)
+biplot(fit,choices = c(2,4),ylim=c(-0.3,0.1))
+xxx<-fit$scores
+#lines(xxx[10001:10192,2],xxx[10001:10192,4],col="green",type = "p")
+x[1:10194]<-1
+x[10000:10194]<-2
+cl<-as.factor(x)
+ggplot(totf, aes(xxx[,1],xxx[,2], color = cl))+geom_point()+labs ( colour = " ластеры" )
+```
+```{r}
+fit12 <- principal(totf, nfactors=5, rotate="varimax")
+x<-fit12
+plot(x$scores)
+vv<-x$scores
+plot(x$scores)
+lines(vv[1:10000,1],vv[1:10000,2],col="red",type = "p")
+lines(vv[10000:10192,1],vv[10000:10192,2],col="green",type = "p")
+```
+
