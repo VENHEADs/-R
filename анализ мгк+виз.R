@@ -13,6 +13,6 @@ library(psych)
 fit<-principal(totf)
 fit <- princomp(totf, cor=TRUE)
 summary(fit)
-biplot(fit,choices = c(2,4))
+biplot(fit,choices = c(2,4),ylim=c(-0.3,0.1))
 xxx<-fit$scores
 lines(xxx[10001:10192,2],xxx[10001:10192,4],col="green",type = "p")
